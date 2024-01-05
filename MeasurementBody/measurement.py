@@ -1,5 +1,6 @@
 import cv2
 import mediapipe as mp
+from math import sqrt
 
 def getCannyEdge(image):
   gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
@@ -21,11 +22,94 @@ def getHeadPoint(image):
         max = [p[0][0], p[0][1]]
   return max
 
+def getSpecificBodyPoints(landmarks, x, y, specific_points):
+  body_points = []
+  specific_points = [2, 5, 11, 12, 13, 14, 15, 16, 19, 20, 23, 24, 25, 26, 27, 28]  # Chỉ quan tâm đến một số điểm cụ thể
+  body_points = getSpecificBodyPoints(landmarks, x, y, specific_points)
+  
+  # left_eye = (int(landmarks[2].x * x),
+  #             int(landmarks[2].y * y))
+  # right_eye = (int(landmarks[5].x * x),
+  #             int(landmarks[5].y * y))    
+      
+  # nose = (int(landmarks[0].x * x),
+  #         int(landmarks[0].y * y))
+  
+  # left_ear = (int(landmarks[7].x * x),
+  #             int(landmarks[7].y * y))
+  # right_ear = (int(landmarks[8].x * x),
+  #             int(landmarks[8].y * y))
+  
+  # mouth_left = (int(landmarks[9].x * x),
+  #               int(landmarks[9].y * y))
+  # mouth_right = (int(landmarks[10].x * x),
+  #               int(landmarks[10].y * y))
+  
+  
+  right_shoulder = (int(landmarks[12].x * x),
+                  int(landmarks[12].y * y))
+  left_shoulder = (int(landmarks[11].x * x),
+                  int(landmarks[11].y * y))
+  
+  
+  # # khuỷu tay
+  # left_elbow = (int(landmarks[13].x * x),
+  #                 int(landmarks[13].y * y))
+  # right_elbow = (int(landmarks[14].x * x),
+  #                 int(landmarks[14].y * y))
+  
+  # left_shoulder = (int(landmarks[11].x * x),
+  #                 int(landmarks[11].y * y))
+  
+  # # cổ tay
+  # left_wrist = (int(landmarks[15].x * x),
+  #               int(landmarks[15].y * y))
+  # right_wrist = (int(landmarks[16].x * x),
+  #               int(landmarks[16].y * y))
+  
+  # # ngón cái
+  # left_index = (int(landmarks[19].x * x),
+  #               int(landmarks[19].y * y))
+  # right_index = (int(landmarks[20].x * x),
+  #               int(landmarks[20].y * y))
+  
+  # # hông
+  # left_hip = (int(landmarks[23].x * x),
+  #               int(landmarks[23].y * y))
+  # right_hip = (int(landmarks[24].x * x),
+  #               int(landmarks[24].y * y))
+  
+  
+  # # đầu gối
+  # left_knee = (int(landmarks[25].x * x),
+  #               int(landmarks[25].y * y))
+  # right_knee = (int(landmarks[26].x * x),
+  #               int(landmarks[26].y * y))
+  
+  # #cổ chân
+  # left_ankle = (int(landmarks[27].x * x),
+  #               int(landmarks[27].y * y))
+  # right_ankle = (int(landmarks[28].x * x),
+  #               int(landmarks[28].y * y))
+  
+  
+  for point_index in specific_points:
+    body_points.append((int(landmarks[point_index].x * x), int(landmarks[point_index].y * y)))
+  return body_points
+
+def spaceBody(landmarks, x, y):
+  space_shoulder = sqrt(pow((left_shoulder[0] - right_shoulder[0]),2) + pow((left_shoulder[1] - right_shoulder[1]),2));
+  return [space_shoulder]
+
 def getAvgHeel(landmarks, x, y):
   right_heel = (int(landmarks[29].x * x),
                 int(landmarks[29].y * y))
   left_heel = (int(landmarks[30].x * x),
               int(landmarks[30].y * y))
+  
+  
   x_avg = int((right_heel[0] + left_heel[0]) / 2)
   y_avg = int((right_heel[1] + left_heel[1]) / 2)
+  
   return [x_avg, y_avg]
+ 
