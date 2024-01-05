@@ -97,9 +97,16 @@ def getSpecificBodyPoints(landmarks, x, y, specific_points):
     body_points.append((int(landmarks[point_index].x * x), int(landmarks[point_index].y * y)))
   return body_points
 
-def spaceBody(landmarks, x, y):
-  space_shoulder = sqrt(pow((left_shoulder[0] - right_shoulder[0]),2) + pow((left_shoulder[1] - right_shoulder[1]),2));
-  return [space_shoulder]
+def getDistanceFrom2Points(point1, point2):
+  return sqrt(pow(point1.x-point2.x,2) + pow(point1.y-point2.y,2))
+
+def getDistances(landmarks):
+  l = [[11, 12], [11, 13], [13, 15], [12, 14],[14, 16],[11, 15], [12, 16], [11, 23], [12, 24], [23, 25], [24, 26], [25, 27], [26, 28], [23, 29], [24, 30], [11, 29], [12, 30]]
+  l_distances = []
+
+  for i in l:
+    l_distances.append(getDistanceFrom2Points(landmarks[i[0]], landmarks[i[1]]))
+  return l_distances
 
 def getAvgHeel(landmarks, x, y):
   right_heel = (int(landmarks[29].x * x),
