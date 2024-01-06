@@ -22,10 +22,10 @@ def getHeadPoint(image):
         max = [p[0][0], p[0][1]]
   return max
 
-def getSpecificBodyPoints(landmarks, x, y, specific_points):
-  body_points = []
-  specific_points = [2, 5, 11, 12, 13, 14, 15, 16, 19, 20, 23, 24, 25, 26, 27, 28]  # Chỉ quan tâm đến một số điểm cụ thể
-  body_points = getSpecificBodyPoints(landmarks, x, y, specific_points)
+# def getSpecificBodyPoints(landmarks, x, y, specific_points):
+#   body_points = []
+#   specific_points = [2, 5, 11, 12, 13, 14, 15, 16, 19, 20, 23, 24, 25, 26, 27, 28]  # Chỉ quan tâm đến một số điểm cụ thể
+#   body_points = getSpecificBodyPoints(landmarks, x, y, specific_points)
   
   # left_eye = (int(landmarks[2].x * x),
   #             int(landmarks[2].y * y))
@@ -46,10 +46,10 @@ def getSpecificBodyPoints(landmarks, x, y, specific_points):
   #               int(landmarks[10].y * y))
   
   
-  right_shoulder = (int(landmarks[12].x * x),
-                  int(landmarks[12].y * y))
-  left_shoulder = (int(landmarks[11].x * x),
-                  int(landmarks[11].y * y))
+  # right_shoulder = (int(landmarks[12].x * x),
+  #                 int(landmarks[12].y * y))
+  # left_shoulder = (int(landmarks[11].x * x),
+  #                 int(landmarks[11].y * y))
   
   
   # # khuỷu tay
@@ -93,13 +93,19 @@ def getSpecificBodyPoints(landmarks, x, y, specific_points):
   #               int(landmarks[28].y * y))
   
   
-  for point_index in specific_points:
-    body_points.append((int(landmarks[point_index].x * x), int(landmarks[point_index].y * y)))
-  return body_points
+  # for point_index in specific_points:
+  #   body_points.append((int(landmarks[point_index].x * x), int(landmarks[point_index].y * y)))
+  # return body_points
+  
+def getSpecificBodyPoints(landmarks, x, y, specific_points):
+    body_points = []
+    for point_index in specific_points:
+        body_points.append((int(landmarks[point_index].x * x), int(landmarks[point_index].y * y)))
+    return body_points
 
 def getDistanceFrom2Points(point1, point2):
-  return sqrt(pow(point1.x-point2.x,2) + pow(point1.y-point2.y,2))
-
+    return sqrt(pow(point1.x - point2.x, 2) + pow(point1.y - point2.y, 2))
+  
 def getDistances(landmarks):
   l = [[11, 12], [11, 13], [13, 15], [12, 14],[14, 16],[11, 15], [12, 16], [11, 23], [12, 24], [23, 25], [24, 26], [25, 27], [26, 28], [23, 29], [24, 30], [11, 29], [12, 30]]
   l_distances = []
@@ -119,4 +125,3 @@ def getAvgHeel(landmarks, x, y):
   y_avg = int((right_heel[1] + left_heel[1]) / 2)
   
   return [x_avg, y_avg]
- 

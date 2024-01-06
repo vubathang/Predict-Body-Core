@@ -9,6 +9,10 @@ y = image.shape[0]
 
 print(x, y)
 
+# Vẽ tất cả các điểm trên ảnh
+for point in ms.getAvgHeel(landmarks, x, y)[2]:
+    cv2.circle(image, tuple(point), 5, (0, 255, 0), -1)  # Vẽ một hình tròn với bán kính 5 tại mỗi điểm
+
 cv2.line(image, ms.getHeadPoint(image), ms.getAvgHeel(landmarks, x, y)[:2], (0, 255, 0), 3)
 
 ratio_image = 500 / y
@@ -16,12 +20,5 @@ ratio_image = 500 / y
 image = cv2.resize(image, (0, 0), fx=ratio_image, fy=ratio_image)
 cv2.imshow('Result', image)
 cv2.waitKey(0)
-
-# Giả định tỷ lệ pixel-to-cm
-estimated_pixel_to_cm_ratio = 150
-
-# Tính toán khoảng cách và chuyển đổi sang đơn vị cm
-distances_in_pixels = ms.getDistances(landmarks)
-distances_in_cm = [distance * estimated_pixel_to_cm_ratio for distance in distances_in_pixels]
-
-print("Khoảng cách (cm): ", distances_in_cm)
+print("Space between shoulders:", result_space_shoulder)
+# ms.printDistances(landmarks
