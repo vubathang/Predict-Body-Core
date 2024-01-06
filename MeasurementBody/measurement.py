@@ -22,12 +22,7 @@ def getHeadPoint(image):
         max = [p[0][0], p[0][1]]
   return max
 
-<<<<<<< HEAD
-# def getSpecificBodyPoints(landmarks, x, y, specific_points):
-#   body_points = []
-#   specific_points = [2, 5, 11, 12, 13, 14, 15, 16, 19, 20, 23, 24, 25, 26, 27, 28]  # Chỉ quan tâm đến một số điểm cụ thể
-#   body_points = getSpecificBodyPoints(landmarks, x, y, specific_points)
-=======
+
 def getSpecificBodyPoints(landmarks, x, y, specific_points):
   body_points = []
   specific_points = [2, 5, 11, 12, 13, 14, 15, 16, 19, 20, 23, 24, 25, 26, 27, 28]  # Chỉ quan tâm đến một số điểm cụ thể
@@ -53,7 +48,6 @@ def getAvgHeel(landmarks, x, y):
                 int(landmarks[29].y * y))
   left_heel = (int(landmarks[30].x * x),
               int(landmarks[30].y * y))
->>>>>>> d8f801bf48470d7f4e609d407640ae3786cc9611
   
   
   x_avg = int((right_heel[0] + left_heel[0]) / 2)
@@ -125,41 +119,4 @@ def getAvgHeel(landmarks, x, y):
   #               int(landmarks[27].y * y))
   # right_ankle = (int(landmarks[28].x * x),
   #               int(landmarks[28].y * y))
-<<<<<<< HEAD
-  
-  
-  # for point_index in specific_points:
-  #   body_points.append((int(landmarks[point_index].x * x), int(landmarks[point_index].y * y)))
-  # return body_points
-  
-def getSpecificBodyPoints(landmarks, x, y, specific_points):
-    body_points = []
-    for point_index in specific_points:
-        body_points.append((int(landmarks[point_index].x * x), int(landmarks[point_index].y * y)))
-    return body_points
 
-def getDistanceFrom2Points(point1, point2):
-    return sqrt(pow(point1.x - point2.x, 2) + pow(point1.y - point2.y, 2))
-  
-def getDistances(landmarks):
-  l = [[11, 12], [11, 13], [13, 15], [12, 14],[14, 16],[11, 15], [12, 16], [11, 23], [12, 24], [23, 25], [24, 26], [25, 27], [26, 28], [23, 29], [24, 30], [11, 29], [12, 30]]
-  l_distances = []
-
-  for i in l:
-    l_distances.append(getDistanceFrom2Points(landmarks[i[0]], landmarks[i[1]]))
-  return l_distances
-
-def getAvgHeel(landmarks, x, y):
-  right_heel = (int(landmarks[29].x * x),
-                int(landmarks[29].y * y))
-  left_heel = (int(landmarks[30].x * x),
-              int(landmarks[30].y * y))
-  
-  
-  x_avg = int((right_heel[0] + left_heel[0]) / 2)
-  y_avg = int((right_heel[1] + left_heel[1]) / 2)
-  
-  return [x_avg, y_avg]
-=======
-  
->>>>>>> d8f801bf48470d7f4e609d407640ae3786cc9611
