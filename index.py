@@ -16,7 +16,9 @@ ratio_image = 500 / y
 image = cv2.resize(image, (0, 0), fx=ratio_image, fy=ratio_image)
 cv2.imshow('Result', image)
 cv2.waitKey(0)
+print("Khoảng cách:", ms.getDistances(landmarks))
 
+<<<<<<< HEAD
 # Giả định tỷ lệ pixel-to-cm
 estimated_pixel_to_cm_ratio = 150
 
@@ -25,3 +27,5 @@ distances_in_pixels = ms.getDistances(landmarks)
 distances_in_cm = [distance * estimated_pixel_to_cm_ratio for distance in distances_in_pixels]
 
 print("Khoảng cách (cm): ", distances_in_cm)
+=======
+>>>>>>> d8f801bf48470d7f4e609d407640ae3786cc9611
