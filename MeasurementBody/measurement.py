@@ -22,15 +22,6 @@ def getHeadPoint(image):
         max = [p[0][0], p[0][1]]
   return max
 
-
-def getSpecificBodyPoints(landmarks, x, y, specific_points):
-  body_points = []
-  specific_points = [2, 5, 11, 12, 13, 14, 15, 16, 19, 20, 23, 24, 25, 26, 27, 28]  # Chỉ quan tâm đến một số điểm cụ thể
-  body_points = getSpecificBodyPoints(landmarks, x, y, specific_points)
-  for point_index in specific_points:
-    body_points.append((int(landmarks[point_index].x * x), int(landmarks[point_index].y * y)))
-  return body_points
-
 def getDistanceFrom2Points(point1, point2):
   return sqrt(pow(point1.x-point2.x,2) + pow(point1.y-point2.y,2))
 
