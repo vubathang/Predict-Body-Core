@@ -22,15 +22,17 @@ def getHeadPoint(image):
         max = [p[0][0], p[0][1]]
   return max
 
-def getDistanceFrom2Points(point1, point2):
-  return sqrt(pow(point1.x-point2.x,2) + pow(point1.y-point2.y,2))
+def getDistanceFrom2Points(point1, point2, x, y):
+  return sqrt(pow(point1.x * x-point2.x * x,2) + pow(point1.y * y -point2.y * y,2))
 
-def getDistances(landmarks):
+def getDistances(landmarks, img):
+  x = img.shape[1]
+  y = img.shape[0]
   l = [[11, 12], [11, 13], [13, 15], [12, 14],[14, 16],[11, 15], [12, 16], [11, 23], [12, 24], [23, 25], [24, 26], [25, 27], [26, 28], [23, 29], [24, 30], [11, 29], [12, 30]]
   l_distances = []
 
   for i in l:
-    l_distances.append(getDistanceFrom2Points(landmarks[i[1]], landmarks[i[0]]))
+    l_distances.append(getDistanceFrom2Points(landmarks[i[1]], landmarks[i[0]], x, y))
   return l_distances
 
 
@@ -47,3 +49,19 @@ def getAvgHeel(landmarks, x, y):
   return [x_avg, y_avg]
  
 
+def test(img, h):
+  point1 = getHeadPoint(img)
+  point2 = getAvgHeel(getLandmark(img), img.shape[1], img.shape[0])
+  h_img = sqrt(pow(point1[1]-point2[1],2) + pow(point1[0]-point2[0],2))
+  ratio = h / h_img
+
+  l = getDistances(getLandmark(img), img)
+  for i in l:
+    print(i * ratio)
+# chạy thử là đoạn code ở dưới nhé
+# chỗ img thì cho mấy ảnh trong số 20 ảnh mẫu xong so sánh vs kết quả bảng excel nhé
+img = cv2.imread('./data/image/i2.jpg')
+h = 173 # nhập cái số đo height trong ảnh vào đây nhé
+
+test(img, h)
+#CHÚ Ý: mấy cái số đo trong bảng excel sẽ có cái ko phải đơn vị cm nên nhớ đổi sang cm rùi hẵng so sánh vs kết quả code nhé
