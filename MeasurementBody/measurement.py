@@ -84,4 +84,4 @@ def test(img, h):
   print("Trung bình của Thứ tự 6 và 7: {}".format(total_distance_67 / count_67) if count_67 > 0 else "Không có giá trị để tính trung bình.")
   print("Trung bình của Thứ tự 14 và 15: {}".format(total_distance_1415 / count_1415) if count_1415 > 0 else "Không có giá trị để tính trung bình.")
   print("Trung bình của Thứ tự 2 và 4: {}".format(total_distance_24 / count_24) if count_24 > 0 else "Không có giá trị để tính trung bình.")
-  
+   
